@@ -13,6 +13,7 @@ import java.util.List;
 public class ContentController {
     private final ContentControllerRepository repository;
 
+    // DI!
     public ContentController(ContentControllerRepository repository) {
         this.repository = repository;
     }
