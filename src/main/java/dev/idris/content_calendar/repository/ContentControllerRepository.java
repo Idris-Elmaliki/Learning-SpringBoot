@@ -30,7 +30,19 @@ public class ContentControllerRepository {
                 ""
         );
 
+        Content c2 = new Content(
+                2,
+                "My Second Blog",
+                "My second blog post",
+                Status.IDEA,
+                Type.ARTICLE,
+                LocalDateTime.now(),
+                null,
+                ""
+        );
+
         contentList.add(c);
+        contentList.add(c2);
     }
 
     public List<Content> findAll() {
