@@ -3,14 +3,10 @@ package dev.idris.content_calendar.controller;
 import dev.idris.content_calendar.model.Content;
 import dev.idris.content_calendar.repository.ContentControllerRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Content")
@@ -31,5 +27,26 @@ public class ContentController {
     public Content findById(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found."));
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    public void create(@RequestBody Content content) {
+        repository.save(content);
+    }
+
+    @PutMapping("/{id}")
+    public void update(
+        @RequestBody Content content,
+        @PathVariable Integer id
+    ) {
+        repository.upsert(content, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(
+        @PathVariable Integer id
+    ) {
+        repository.delete(id);
     }
 }
