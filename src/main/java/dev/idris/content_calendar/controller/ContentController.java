@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/Content")
+@CrossOrigin()
 public class ContentController {
     private final ContentControllerRepository repository;
 
