@@ -2,6 +2,7 @@ package dev.idris.content_calendar.controller;
 
 import dev.idris.content_calendar.model.Content;
 import dev.idris.content_calendar.repository.ContentControllerRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,13 +33,13 @@ public class ContentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Content content) {
+    public void create(@Valid @RequestBody Content content) {
         repository.save(content);
     }
 
     @PutMapping("/{id}")
     public void update(
-        @RequestBody Content content,
+        @Valid @RequestBody Content content,
         @PathVariable Integer id
     ) {
         repository.upsert(content, id);
